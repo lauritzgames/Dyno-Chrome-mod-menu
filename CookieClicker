@@ -1,0 +1,57 @@
+const menu = document.createElement('div');
+menu.style = `
+    position: fixed; top: 10px; right: 10px; z-index: 9999; 
+    background: #222; color: #e1b378; padding: 15px; 
+    border-radius: 8px; font-family: 'Courier New', monospace; 
+    box-shadow: 0 0 15px rgba(0,0,0,0.8); border: 2px solid #444;
+    min-width: 200px;
+`;
+
+menu.innerHTML = `
+    <h3 style="margin-top:0; text-align:center; border-bottom: 1px solid #444;">Cookie Mod Pro</h3>
+    <button onclick="openSesame()" style="width:100%; margin-bottom:5px; background:#4a2c2a; color:white; font-weight:bold;">DEV MENU (Sesame)</button>
+    <button onclick="addCookies()" style="width:100%; margin-bottom:5px;">+1 Mia. Cookies</button>
+    <button onclick="autoClicker()" id="clickBtn" style="width:100%; margin-bottom:5px;">Auto-Click: OFF</button>
+    <button onclick="freeStuff()" style="width:100%; margin-bottom:5px;">Alt er Gratis</button>
+    <button onclick="getSugar()" style="width:100%; margin-bottom:5px;">Giv Sugar Lumps</button>
+    <button onclick="unlockAll()" style="width:100%;">Lås alt op</button>
+`;
+document.body.appendChild(menu);
+window.openSesame = () => {
+    let currentName = Game.bakeryName;
+    Game.bakeryNameSet(currentName + " saysopensesame");
+    Game.Notify('Sesame Open!', 'Developer menuen er nu aktiv i venstre side.',);
+};
+
+window.addCookies = () => {
+    Game.Earn(1000000000);
+    Game.Notify('Snyd aktiveret', 'Du fik 1 milliard småkager!',);
+};
+
+let clickInterval = null;
+window.autoClicker = () => {
+    if (!clickInterval) {
+        clickInterval = setInterval(() => Game.ClickCookie(), 10);
+        document.getElementById('clickBtn').innerText = "Auto-Click: ON";
+    } else {
+        clearInterval(clickInterval);
+        clickInterval = null;
+        document.getElementById('clickBtn').innerText = "Auto-Click: OFF";
+    }
+};
+
+window.freeStuff = () => {
+    Game.priceEvents = 0;
+    Game.Notify('Gratis shopping', 'Alle priser er nu 0!',);
+};
+
+window.getSugar = () => {
+    Game.gainLumps(100);
+    Game.Notify('Sukkerchok', 'Du fik 100 Sugar Lumps!',);
+};
+
+window.unlockAll = () => {
+    Game.SetAllAchievs(1);
+    Game.SetAllUpgrade(1);
+    Game.Notify('Master', 'Alt er låst op!',);
+};
