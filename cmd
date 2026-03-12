@@ -7,8 +7,8 @@ menu.style = `
 menu.innerHTML = `
     <h3 style="margin-top:0">Dino Mod Menu</h3>
     <button onclick="godMode()">God Mode: OFF</button><br><br>
-    <button onclick="">Sæt fart (not here)</button><br><br>
-    <button onclick="">Højt hop: OFF(not here)</button>
+    <button onclick="setSpeed()">Sæt fart (100)</button><br><br>
+    <button onclick="highJump()">Højt hop: OFF</button>
 `;
 document.body.appendChild(menu);
 
@@ -18,4 +18,14 @@ window.godMode = () => {
     const originalGameOver = Runner.prototype.gameOver;
     Runner.prototype.gameOver = isGodMode ? function(){} : originalGameOver;
     event.target.innerText = "God Mode: " + (isGodMode ? "ON" : "OFF");
+};
+
+window.setSpeed = () => {
+    const speed = prompt("Indtast fart (f.eks. 100):", "100");
+    Runner.getInstance().setSpeed(parseInt(speed));
+};
+
+window.highJump = () => {
+    Runner.getInstance().tRex.config.GRAVITY = 0.1;
+    alert("Tyngdekraften er ændret!");
 };
