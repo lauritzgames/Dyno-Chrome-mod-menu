@@ -22,7 +22,7 @@ window.godMode = () => {
 
 window.setSpeed = () => {
     const speed = prompt("Indtast fart (f.eks. 100):", "100");
-    Runner.getInstance().setSpeed(parseInt(speed));
+    Runner.getInstance().setSpeed(parseInt(speed));    event.target.innerText = "Sæt fart ( " + (speed)+")";
 };
 
 window.highJump = () => {
